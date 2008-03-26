@@ -1,0 +1,113 @@
+<html><head><style type="text/css">
+.ruby { font-size: 24pt; font-weight: bold; }
+.ruby .normal {}
+.ruby .linenumber { color: #aaa; font-style: italic; font-size: 16pt; }
+.ruby .comment { color: #888; font-style: italic; }
+.ruby .keyword { color: #A00; font-weight: bold; }
+.ruby .method { color: #077; }
+.ruby .class { color: #074; }
+.ruby .module { color: #050; }
+.ruby .punct { color: #447; font-weight: bold; }
+.ruby .symbol { color: #099; }
+.ruby .string { color: #944; }
+.ruby .char { color: #F07; }
+.ruby .ident { color: #004; }
+.ruby .constant { color: #07F; }
+.ruby .regex { color: #B66; }
+.ruby .number { color: #D55; }
+.ruby .attribute { color: #377; }
+.ruby .global { color: #3B7; }
+.ruby .expr { color: #227; }
+</style></head><body><pre class="ruby"><span class="linenumber">       </span><span class="comment">#!/usr/bin/env ruby</span>
+<span class="linenumber">       </span>
+<span class="linenumber">       </span><span class="ident">require</span> <span class="punct">'</span><span class="string">syntax/convertors/html</span><span class="punct">'</span>
+<span class="linenumber">       </span>
+<span class="linenumber">  5    </span><span class="keyword">class </span><span class="class">LineNumberFilter</span>
+<span class="linenumber">       </span>  <span class="keyword">def </span><span class="method">initialize</span><span class="punct">(</span><span class="ident">every</span><span class="punct">=</span><span class="number">1</span><span class="punct">,</span> <span class="ident">sep</span><span class="punct">='</span><span class="string">  </span><span class="punct">')</span>
+<span class="linenumber">       </span>    <span class="attribute">@every</span> <span class="punct">=</span> <span class="ident">every</span>
+<span class="linenumber">       </span>    <span class="attribute">@sep</span> <span class="punct">=</span> <span class="ident">sep</span>
+<span class="linenumber">       </span>  <span class="keyword">end</span>
+<span class="linenumber"> 10    </span>  <span class="keyword">def </span><span class="method">filter</span><span class="punct">(</span><span class="ident">text</span><span class="punct">)</span>
+<span class="linenumber">       </span>    <span class="ident">n</span> <span class="punct">=</span> <span class="number">0</span>
+<span class="linenumber">       </span>    <span class="ident">text</span><span class="punct">.</span><span class="ident">split</span><span class="punct">(&quot;</span><span class="string"><span class="escape">\n</span></span><span class="punct">&quot;).</span><span class="ident">collect</span> <span class="punct">{</span> <span class="punct">|</span><span class="ident">ln</span><span class="punct">|</span>
+<span class="linenumber">       </span>      <span class="ident">n</span> <span class="punct">+=</span> <span class="number">1</span>
+<span class="linenumber">       </span>      <span class="keyword">if</span> <span class="punct">(</span><span class="ident">n</span> <span class="punct">%</span> <span class="attribute">@every</span> <span class="punct">==</span> <span class="number">0</span><span class="punct">)</span>
+<span class="linenumber"> 15    </span>        <span class="ident">no</span> <span class="punct">=</span> <span class="punct">&quot;</span><span class="string">%3d<span class="expr">#{@sep}</span>  </span><span class="punct">&quot;</span> <span class="punct">%</span> <span class="ident">n</span>
+<span class="linenumber">       </span>      <span class="keyword">else</span>
+<span class="linenumber">       </span>        <span class="ident">no</span> <span class="punct">=</span> <span class="punct">&quot;</span><span class="string">   <span class="expr">#{@sep}</span>  </span><span class="punct">&quot;</span>
+<span class="linenumber">       </span>      <span class="keyword">end</span>
+<span class="linenumber">       </span>      <span class="punct">&quot;</span><span class="string">&lt;span class=<span class="escape">\&quot;</span>linenumber<span class="escape">\&quot;</span>&gt;<span class="expr">#{no}</span>&lt;/span&gt;<span class="expr">#{ln}</span></span><span class="punct">&quot;</span>
+<span class="linenumber"> 20    </span>    <span class="punct">}.</span><span class="ident">join</span><span class="punct">(&quot;</span><span class="string"><span class="escape">\n</span></span><span class="punct">&quot;)</span>
+<span class="linenumber">       </span>  <span class="keyword">end</span>
+<span class="linenumber">       </span><span class="keyword">end</span>
+<span class="linenumber">       </span>
+<span class="linenumber">       </span><span class="keyword">class </span><span class="class">Styler</span>
+<span class="linenumber"> 25    </span>  <span class="keyword">def </span><span class="method">style</span>
+<span class="linenumber">       </span>    <span class="punct">%(</span><span class="string">&lt;style type=&quot;text/css&quot;&gt;
+<span class="linenumber">       </span>.ruby { font-size: 24pt; font-weight: bold; }
+<span class="linenumber">       </span>.ruby .normal {}
+<span class="linenumber">       </span>.ruby .linenumber { color: #aaa; font-style: italic; font-size: 16pt; }
+<span class="linenumber"> 30    </span>.ruby .comment { color: #888; font-style: italic; }
+<span class="linenumber">       </span>.ruby .keyword { color: #A00; font-weight: bold; }
+<span class="linenumber">       </span>.ruby .method { color: #077; }
+<span class="linenumber">       </span>.ruby .class { color: #074; }
+<span class="linenumber">       </span>.ruby .module { color: #050; }
+<span class="linenumber"> 35    </span>.ruby .punct { color: #447; font-weight: bold; }
+<span class="linenumber">       </span>.ruby .symbol { color: #099; }
+<span class="linenumber">       </span>.ruby .string { color: #944; }
+<span class="linenumber">       </span>.ruby .char { color: #F07; }
+<span class="linenumber">       </span>.ruby .ident { color: #004; }
+<span class="linenumber"> 40    </span>.ruby .constant { color: #07F; }
+<span class="linenumber">       </span>.ruby .regex { color: #B66; }
+<span class="linenumber">       </span>.ruby .number { color: #D55; }
+<span class="linenumber">       </span>.ruby .attribute { color: #377; }
+<span class="linenumber">       </span>.ruby .global { color: #3B7; }
+<span class="linenumber"> 45    </span>.ruby .expr { color: #227; }
+<span class="linenumber">       </span>&lt;/style&gt;</span><span class="punct">)</span>
+<span class="linenumber">       </span>  <span class="keyword">end</span>
+<span class="linenumber">       </span><span class="keyword">end</span>
+<span class="linenumber">       </span>
+<span class="linenumber"> 50    </span><span class="keyword">class </span><span class="class">ExtractLiteral</span>
+<span class="linenumber">       </span>  <span class="keyword">def </span><span class="method">initialize</span><span class="punct">(</span><span class="ident">literal_text</span><span class="punct">)</span>
+<span class="linenumber">       </span>    <span class="attribute">@literal_text</span> <span class="punct">=</span> <span class="ident">literal_text</span>
+<span class="linenumber">       </span>  <span class="keyword">end</span>
+<span class="linenumber">       </span>  <span class="keyword">def </span><span class="method">extract</span>
+<span class="linenumber"> 55    </span>    <span class="attribute">@literal_text</span>
+<span class="linenumber">       </span>  <span class="keyword">end</span>
+<span class="linenumber">       </span><span class="keyword">end</span>
+<span class="linenumber">       </span>
+<span class="linenumber">       </span><span class="keyword">class </span><span class="class">FileExtractor</span>
+<span class="linenumber"> 60    </span>  <span class="keyword">def </span><span class="method">initialize</span><span class="punct">(</span><span class="ident">file_name</span><span class="punct">)</span>
+<span class="linenumber">       </span>    <span class="attribute">@file_name</span> <span class="punct">=</span> <span class="ident">file_name</span>
+<span class="linenumber">       </span>  <span class="keyword">end</span>
+<span class="linenumber">       </span>  <span class="keyword">def </span><span class="method">extract</span>
+<span class="linenumber">       </span>    <span class="ident">open</span><span class="punct">(</span><span class="attribute">@file_name</span><span class="punct">)</span> <span class="punct">{</span> <span class="punct">|</span><span class="ident">f</span><span class="punct">|</span> <span class="ident">f</span><span class="punct">.</span><span class="ident">read</span> <span class="punct">}</span>
+<span class="linenumber"> 65    </span>  <span class="keyword">end</span>
+<span class="linenumber">       </span><span class="keyword">end</span>
+<span class="linenumber">       </span>
+<span class="linenumber">       </span><span class="keyword">class </span><span class="class">Formatter</span>
+<span class="linenumber">       </span>  <span class="keyword">def </span><span class="method">initialize</span><span class="punct">(</span><span class="ident">extractor</span><span class="punct">,</span> <span class="ident">styler</span><span class="punct">=</span><span class="constant">Styler</span><span class="punct">.</span><span class="ident">new</span><span class="punct">)</span>
+<span class="linenumber"> 70    </span>    <span class="attribute">@extractor</span> <span class="punct">=</span> <span class="ident">extractor</span>
+<span class="linenumber">       </span>    <span class="attribute">@styler</span> <span class="punct">=</span> <span class="constant">Styler</span><span class="punct">.</span><span class="ident">new</span>
+<span class="linenumber">       </span>  <span class="keyword">end</span>
+<span class="linenumber">       </span>  <span class="keyword">def </span><span class="method">convert</span>
+<span class="linenumber">       </span>    <span class="ident">convertor</span> <span class="punct">=</span> <span class="constant">Syntax</span><span class="punct">::</span><span class="constant">Convertors</span><span class="punct">::</span><span class="constant">HTML</span><span class="punct">.</span><span class="ident">for_syntax</span><span class="punct">(&quot;</span><span class="string">ruby</span><span class="punct">&quot;)</span>
+<span class="linenumber"> 75    </span>    <span class="ident">formatted_code</span> <span class="punct">=</span> <span class="ident">convertor</span><span class="punct">.</span><span class="ident">convert</span><span class="punct">(</span><span class="attribute">@extractor</span><span class="punct">.</span><span class="ident">extract</span><span class="punct">)</span>
+<span class="linenumber">       </span>    <span class="ident">formatted_code</span><span class="punct">.</span><span class="ident">gsub</span><span class="punct">(/</span><span class="regex">&lt;<span class="escape">\/</span>?pre&gt;</span><span class="punct">/,</span> <span class="punct">'</span><span class="string"></span><span class="punct">')</span>
+<span class="linenumber">       </span>  <span class="keyword">end</span>
+<span class="linenumber">       </span>  <span class="keyword">def </span><span class="method">format</span>
+<span class="linenumber">       </span>    <span class="ident">filt</span> <span class="punct">=</span> <span class="constant">LineNumberFilter</span><span class="punct">.</span><span class="ident">new</span><span class="punct">(</span><span class="number">5</span><span class="punct">)</span>
+<span class="linenumber"> 80    </span>    <span class="ident">formatted_code</span> <span class="punct">=</span> <span class="ident">filt</span><span class="punct">.</span><span class="ident">filter</span><span class="punct">(</span><span class="ident">convert</span><span class="punct">)</span>
+<span class="linenumber">       </span>    <span class="punct">&quot;</span><span class="string">&lt;html&gt;&lt;head&gt;<span class="expr">#{@styler.style}</span>&lt;/head&gt;&lt;body&gt;&lt;pre class=<span class="escape">\&quot;</span>ruby<span class="escape">\&quot;</span>&gt;<span class="expr">#{formatted_code}</span>&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;</span><span class="punct">&quot;</span>
+<span class="linenumber">       </span>  <span class="keyword">end</span>
+<span class="linenumber">       </span><span class="keyword">end</span>
+<span class="linenumber">       </span>
+<span class="linenumber"> 85    </span><span class="keyword">def </span><span class="method">extract</span><span class="punct">(</span><span class="ident">outfile</span><span class="punct">,</span> <span class="ident">infile</span><span class="punct">)</span>
+<span class="linenumber">       </span>  <span class="ident">file</span> <span class="ident">outfile</span> <span class="punct">=&gt;</span> <span class="ident">infile</span> <span class="keyword">do</span>
+<span class="linenumber">       </span>    <span class="ident">puts</span> <span class="punct">&quot;</span><span class="string">Extracting <span class="expr">#{outfile}</span></span><span class="punct">&quot;</span>
+<span class="linenumber">       </span>    <span class="ident">formatter</span> <span class="punct">=</span> <span class="constant">Formatter</span><span class="punct">.</span><span class="ident">new</span><span class="punct">(</span><span class="constant">FileExtractor</span><span class="punct">.</span><span class="ident">new</span><span class="punct">(</span><span class="ident">infile</span><span class="punct">))</span>
+<span class="linenumber">       </span>    <span class="ident">open</span><span class="punct">(</span><span class="ident">outfile</span><span class="punct">,</span> <span class="punct">&quot;</span><span class="string">w</span><span class="punct">&quot;)</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">out</span><span class="punct">|</span>
+<span class="linenumber"> 90    </span>      <span class="ident">out</span><span class="punct">.</span><span class="ident">puts</span> <span class="ident">formatter</span><span class="punct">.</span><span class="ident">format</span>
+<span class="linenumber">       </span>    <span class="keyword">end</span>
+<span class="linenumber">       </span>  <span class="keyword">end</span>
+<span class="linenumber">       </span><span class="keyword">end</span></pre></body></html>

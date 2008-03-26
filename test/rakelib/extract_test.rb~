@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+require 'test/unit'
+load "rakelib/extract.rake"
+
+class ExtractTest < Test::Unit::TestCase
+  def test_something
+    ex = ExtractLiteral.new("variable_name")
+    fmt = Formatter.new(ex)
+    html = fmt.format
+    assert_match /\A<html>/i, html
+    assert_match /<\/html>\Z/i, html
+    assert_match /<head>\s*<style\s+type="text\/css"/, html
+    assert_match /\.ruby \.ident/, html
+    assert_match /variable_name/, html
+  end
+end

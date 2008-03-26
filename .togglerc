@@ -1,0 +1,7 @@
+(add-to-list
+ 'toggle-mapping-styles
+ '(present-code    . (("test/rakelib/\\1_test.rb" . "rakelib/\\1.rb")
+                      ("test/\\1_test.rb" . "lib/\\1.rb")
+                      ("\\1_test.rb"      . "\\1.rb")
+                    ) ))
+(buffer-toggle-style 'present-code)
